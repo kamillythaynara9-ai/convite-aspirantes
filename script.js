@@ -56,6 +56,7 @@ const CONVITE = {
   };
   $$("[data-link]").forEach(a => { a.href = links[a.dataset.link]; });
   $("#endereco").textContent = CONVITE.endereco;
+  $("#mapa").src = "https://www.google.com/maps?q=" + busca + "&t=m&z=16&hl=pt-BR&ie=UTF8&iwloc=&output=embed";
   $("#email-texto").textContent = CONVITE.email;
   $("#whatsapp-texto").textContent = CONVITE.whatsappTexto;
 
