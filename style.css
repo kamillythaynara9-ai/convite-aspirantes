@@ -260,14 +260,34 @@ a { color: inherit; }
   from { transform: scale(1.06) translate(0, 0); }
   to   { transform: scale(1.22) translate(-2%, 2%); }
 }
+/* Celular em pé: foto menor, centrada no telhado com o "CPOR-SP" */
+@media (max-aspect-ratio: 1 / 1) {
+  .capa { background: var(--noite-funda); }
+  .capa-foto img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: auto;
+    height: max(66svh, calc(100vw * 1.6));
+    max-width: none;
+    transform-origin: 52% 32%;
+    animation-name: aproximarCel;
+    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 96%);
+    mask-image: linear-gradient(180deg, #000 62%, transparent 96%);
+  }
+}
+@keyframes aproximarCel {
+  from { transform: translateX(-52%) scale(1); }
+  to   { transform: translateX(-52%) scale(1.06); }
+}
 .capa::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background: linear-gradient(180deg,
-    rgba(18, 23, 34, .72) 0%,
-    rgba(18, 23, 34, .38) 32%,
+    rgba(18, 23, 34, .62) 0%,
+    rgba(18, 23, 34, .26) 30%,
     rgba(18, 23, 34, .62) 62%,
     rgba(18, 23, 34, .92) 86%,
     var(--papel) 100%);
