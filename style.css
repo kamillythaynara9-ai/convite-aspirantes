@@ -568,20 +568,18 @@ a { color: inherit; }
 .mapa-quadro {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 528 / 393;
   overflow: hidden;
   border-radius: 2px;
   background: var(--nevoa);
 }
-/* O mapa só mostra o lugar; o toque abre o Google Maps (e não prende a rolagem da página) */
-.mapa-quadro iframe {
-  position: absolute;
-  inset: 0;
+.mapa-quadro img {
   width: 100%;
   height: 100%;
-  border: 0;
-  pointer-events: none;
+  object-fit: cover;
+  transition: transform .6s var(--curva-saida);
 }
+@media (hover: hover) { .mapa:hover .mapa-quadro img { transform: scale(1.03); } }
 @media (hover: hover) { .mapa:hover { box-shadow: 0 2px 4px rgba(18, 23, 34, .08), 0 26px 50px -18px rgba(18, 23, 34, .45); } }
 .mapa-legenda {
   display: block;

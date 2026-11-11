@@ -8,7 +8,7 @@ Página para celular (abre direto pelo link do WhatsApp), sem build: `index.html
 3. Mensagem do convite num papel com o selo postal da fachada; as palavras se acendem conforme a rolagem.
 4. Contagem regressiva até a Diplomação (depois, até a Formatura).
 5. Programação: um cartão para cada data; tocar vira o cartão e mostra o traje.
-6. Local: endereço, botões do Google Maps e do Waze e o mapa do Google com o CPOR/SP; tocar no mapa abre o app de mapas.
+6. Local: endereço, botões do Google Maps e do Waze e uma imagem do mapa (`mapa.png`) que abre o Google Maps ao tocar. É imagem fixa de propósito: o mapa ao vivo do Google falhava no celular.
 7. Confirmação de presença (Google Forms), WhatsApp e e-mail da Comunicação Social.
 8. Rodapé com link para o convite em imagem (`convite.jpg`).
 
