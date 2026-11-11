@@ -538,20 +538,58 @@ a { color: inherit; }
 .botao.claro { background: var(--branco); color: var(--tinta); box-shadow: 0 10px 24px -14px rgba(18, 23, 34, .5); }
 @media (hover: hover) { .botao.claro:hover { box-shadow: 0 16px 30px -14px rgba(18, 23, 34, .55); transform: translateY(-2px); } }
 .mapa {
-  padding: 10px 10px 40px;
+  display: block;
+  padding: 10px 10px 0;
   background: var(--papel-claro) var(--granulado);
   border-radius: 4px;
   box-shadow: var(--sombra-papel);
+  text-decoration: none;
   transform: rotate(1.2deg);
+  transition: transform .3s var(--curva-saida), box-shadow .3s;
 }
-.mapa iframe {
+.mapa:active { transform: rotate(1.2deg) scale(.98); }
+@media (hover: hover) { .mapa:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 2px 4px rgba(18, 23, 34, .08), 0 26px 50px -18px rgba(18, 23, 34, .45); } }
+.mapa-foto {
+  position: relative;
   display: block;
-  width: 100%;
   aspect-ratio: 4 / 3;
-  border: 0;
+  overflow: hidden;
   border-radius: 2px;
-  background: var(--nevoa);
-  filter: grayscale(.35) contrast(1.02);
+}
+.mapa-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  transition: transform .8s var(--curva-saida);
+}
+@media (hover: hover) { .mapa:hover .mapa-foto img { transform: scale(1.05); } }
+.mapa-pino {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--noite);
+  color: var(--cera-clara);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .6);
+  animation: pulso 2.4s ease-out infinite;
+}
+.mapa-pino svg { width: 26px; height: 26px; }
+@keyframes pulso {
+  from { box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .6), 0 0 0 0 rgba(194, 165, 108, .6); }
+  to   { box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .6), 0 0 0 26px rgba(194, 165, 108, 0); }
+}
+.mapa-legenda {
+  display: block;
+  padding: 14px 8px 16px;
+  text-align: center;
+  font: 400 italic 18px/1.3 var(--fonte-titulo);
+  color: var(--ardosia-escura);
 }
 
 /* =========================================================

@@ -58,7 +58,6 @@ const CONVITE = {
   $("#endereco").textContent = CONVITE.endereco;
   $("#email-texto").textContent = CONVITE.email;
   $("#whatsapp-texto").textContent = CONVITE.whatsappTexto;
-  $("#mapa").src = "https://maps.google.com/maps?q=" + busca + "&z=16&output=embed";
 
   /* ---------- Envelope ---------- */
   const cena = $("#envelope");
