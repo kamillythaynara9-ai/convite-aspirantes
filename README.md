@@ -14,4 +14,4 @@ Página para celular (abre direto pelo link do WhatsApp), sem build: `index.html
 
 **Para mudar conteúdo**: links, datas, horários, trajes e contatos ficam no objeto `CONVITE` no topo do `script.js`. O texto da mensagem fica no `index.html` (`#mensagem-texto`).
 
-A prévia do link no WhatsApp usa `https://convite-aspirantes.vercel.app/og.jpg`; se o domínio da Vercel for outro, troque no `og:image` do `index.html`.
+A prévia do link no WhatsApp usa `https://convite-aspirantado.vercel.app/og.jpg`; se o domínio da Vercel for outro, troque no `og:image` do `index.html`.
