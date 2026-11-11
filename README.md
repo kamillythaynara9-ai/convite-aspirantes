@@ -2,6 +2,8 @@
 
 Página simples com a arte do convite (`convite.jpg`), pronta para a Vercel (sem build).
 
+No celular em pé, o convite aparece deitado ocupando a tela inteira (é só girar o celular para ler); com o celular deitado ou no computador, aparece normal.
+
 Áreas clicáveis por cima da arte:
 - **Clique aqui** → formulário de confirmação (Google Forms)
 - e-mail → abre o e-mail para comsoc@cporsp.eb.mil.br
