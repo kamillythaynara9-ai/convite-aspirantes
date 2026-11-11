@@ -3,92 +3,147 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Convite — Encerramento do Ano Letivo CPOR/SP</title>
-<meta name="description" content="Diplomação em 3 de dezembro, às 19h, e Formatura em 5 de dezembro, às 9h. Confirme sua presença até 30 de novembro.">
+<title>Convite · Encerramento do Ano Letivo · CPOR/SP</title>
+<meta name="description" content="Cerimônia de Encerramento do Ano Letivo e conclusão do Curso de Formação de Oficiais da Reserva. Diplomação em 3 de dezembro, às 19h, e Formatura em 5 de dezembro, às 9h.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Convite — Encerramento do Ano Letivo CPOR/SP">
-<meta property="og:description" content="Diplomação em 3 de dezembro, às 19h, e Formatura em 5 de dezembro, às 9h. Confirme sua presença até 30 de novembro.">
-<meta property="og:image" content="https://convite-aspirantes.vercel.app/convite.jpg">
-<meta property="og:image:width" content="1748">
-<meta property="og:image:height" content="1240">
-<meta name="theme-color" content="#1c2430">
-<link rel="preload" as="image" href="convite.jpg">
-<style>
-  :root { --fundo: #1c2430; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; }
-  body {
-    min-height: 100svh;
-    display: grid;
-    place-items: center;
-    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
-    background: var(--fundo);
-    overflow-x: hidden;
-  }
-  /* Fundo: a própria foto do convite, desfocada e escura, para não sobrar faixa vazia no celular */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: -40px;
-    background: url("convite.jpg") center / cover no-repeat;
-    filter: blur(28px) brightness(.45) saturate(.8);
-    z-index: -1;
-  }
-  .convite {
-    position: relative;
-    width: min(100%, calc((100svh - 24px) * 1748 / 1240), 1400px);
-    aspect-ratio: 1748 / 1240;
-  }
-  .convite img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    box-shadow: 0 24px 60px -18px rgba(0, 0, 0, .75);
-  }
-  /* Áreas clicáveis por cima da arte (posições em % da imagem 1748 × 1240) */
-  .area {
-    position: absolute;
-    top: 82.3%;
-    height: 9.7%;
-    border-radius: 4px;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, .15);
-  }
-  .area:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .area.email    { left: 13.7%; width: 23.5%; }
-  .area.whatsapp { left: 40.6%; width: 15.8%; }
-  .area.form     { left: 62%; width: 21%; }
-  /* Celular em pé: o convite fica deitado, ocupando a tela inteira (é só girar o celular para ler) */
-  @media (orientation: portrait) and (max-width: 700px) {
-    .convite {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: min(calc(100svh - 16px), calc((100vw - 14px) * 1748 / 1240));
-      transform: translate(-50%, -50%) rotate(90deg);
-    }
-  }
-  .so-leitor {
-    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
-</style>
+<meta property="og:title" content="Você está convidado · CPOR/SP">
+<meta property="og:description" content="Encerramento do Ano Letivo e conclusão do CFOR. Diplomação em 3/12, às 19h, e Formatura em 5/12, às 9h. Toque para abrir o convite.">
+<meta property="og:image" content="https://convite-aspirantes.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#1c2230">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="selo-cera.png">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <main class="convite">
-    <img src="convite.jpg" width="1748" height="1240"
-         alt="Convite do CPOR/SP para a Cerimônia de Encerramento do Ano Letivo e conclusão do Curso de Formação de Oficiais da Reserva">
-    <a class="area email" href="mailto:comsoc@cporsp.eb.mil.br" aria-label="Enviar e-mail para comsoc@cporsp.eb.mil.br"></a>
-    <a class="area whatsapp" href="https://wa.me/5511939488270" target="_blank" rel="noopener" aria-label="Falar no WhatsApp (11) 93948-8270"></a>
-    <a class="area form" href="https://docs.google.com/forms/d/e/1FAIpQLSddFb4ChG2wfqLAneSF9THKLDbxzMdTWvw0Ty1uSpltod7jzg/viewform?usp=header" target="_blank" rel="noopener" aria-label="Confirmar presença"></a>
-    <div class="so-leitor">
-      O Comandante do Centro de Preparação de Oficiais da Reserva de São Paulo, Coronel Frederico Vieira CABRAL Mendes,
-      tem a honra de convidar o Senhor e digníssima família para a Cerimônia de Encerramento do Ano Letivo e conclusão do
-      Curso de Formação de Oficiais da Reserva. Diplomação: 3 de dezembro, quinta-feira, às 19h. Militares: 5º Z1 ou
-      correspondente; militares da reserva e civis: passeio. Formatura: 5 de dezembro, sábado, às 9h. Oficiais: 4º com
-      barretas ou correspondente; praças: 5º A1/5º A1S com barretas ou correspondente; militares da reserva e civis: passeio.
-      Rua Alfredo Pujol, 681, Santana, São Paulo (SP). Confirmação de presença até 30 de novembro, segunda-feira.
+
+<!-- Abertura: envelope fechado com o selo de cera do CPOR/SP -->
+<section id="envelope" class="cena-envelope" aria-label="Convite fechado">
+  <p class="env-remetente">Centro de Preparação de Oficiais da Reserva de São Paulo</p>
+  <div class="envelope" id="envelope-peca">
+    <div class="env-dentro" aria-hidden="true"></div>
+    <div class="env-carta" aria-hidden="true">
+      <img src="brasao.png" alt="" width="416" height="416">
+      <span class="carta-rotulo">Convite</span>
+      <span class="carta-linha">Encerramento do Ano Letivo</span>
     </div>
-  </main>
+    <div class="env-bolso" aria-hidden="true"></div>
+    <div class="env-aba" aria-hidden="true"></div>
+    <button type="button" class="env-selo" id="abrir" aria-label="Abrir o convite">
+      <img src="selo-cera.png" alt="" width="229" height="235">
+    </button>
+  </div>
+  <p class="env-dica">Toque no selo para abrir</p>
+</section>
+
+<!-- Topo fixo -->
+<header class="topo" id="topo">
+  <a class="topo-marca" href="#inicio" aria-label="Início">
+    <img src="brasao.png" alt="" width="40" height="40">
+    <span>CPOR/SP</span>
+  </a>
+  <a class="topo-acao" data-link="formulario" href="#confirmar" target="_blank" rel="noopener">Confirmar presença</a>
+</header>
+
+<main id="conteudo">
+
+  <!-- Capa: foto aérea do CPOR/SP -->
+  <section id="inicio" class="capa">
+    <div class="capa-foto" aria-hidden="true"><img src="cpor-aereo.jpg" alt="" width="1536" height="1024"></div>
+    <div class="capa-texto">
+      <p class="rotulo">CPOR/SP · Dezembro</p>
+      <h1>Convite</h1>
+      <p class="capa-sub">Cerimônia de Encerramento do Ano Letivo e conclusão do Curso de Formação de Oficiais da Reserva</p>
+      <img class="capa-brasao" src="brasao.png" alt="Brasão do CPOR/SP" width="416" height="416">
+    </div>
+    <a class="capa-seta" href="#mensagem" aria-label="Ler o convite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- Mensagem do convite, num papel com o selo postal da fachada -->
+  <section id="mensagem" class="mensagem">
+    <article class="papel papel-mensagem revelar">
+      <img class="selo-postal" src="selo-postal.png" alt="Selo com a fachada do CPOR/SP" width="207" height="164" loading="lazy">
+      <p class="rotulo">Com a honra de convidar</p>
+      <p class="mensagem-texto" id="mensagem-texto">O Comandante do Centro de Preparação de Oficiais da Reserva de São Paulo, Coronel Frederico Vieira CABRAL Mendes, tem a honra de convidar o Senhor e digníssima família para a Cerimônia de Encerramento do Ano Letivo e conclusão do Curso de Formação de Oficiais da Reserva.</p>
+    </article>
+  </section>
+
+  <!-- Contagem regressiva até a Diplomação -->
+  <section id="contagem" class="contagem" aria-labelledby="contagem-titulo">
+    <h2 id="contagem-titulo" class="rotulo claro">Faltam para a Diplomação</h2>
+    <div class="relogio" id="relogio" role="timer" aria-live="off">
+      <div><span data-u="d">00</span><small>dias</small></div>
+      <div><span data-u="h">00</span><small>horas</small></div>
+      <div><span data-u="m">00</span><small>min</small></div>
+      <div><span data-u="s">00</span><small>seg</small></div>
+    </div>
+    <p class="contagem-fim" id="contagem-fim" hidden></p>
+  </section>
+
+  <!-- Programação: cartões que viram para mostrar o traje -->
+  <section id="programacao" class="programacao" aria-labelledby="programacao-titulo">
+    <p class="rotulo">Programação</p>
+    <h2 id="programacao-titulo" class="titulo">Duas datas, uma conquista</h2>
+    <p class="nota">Toque no cartão para ver o traje.</p>
+    <div class="cartoes" id="cartoes"></div>
+  </section>
+
+  <!-- Local com mapa -->
+  <section id="local" class="local" aria-labelledby="local-titulo">
+    <div class="local-texto revelar">
+      <p class="rotulo">Local</p>
+      <h2 id="local-titulo" class="titulo">CPOR/SP</h2>
+      <p class="endereco" id="endereco"></p>
+      <div class="botoes">
+        <a class="botao claro" data-link="maps" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          Google Maps
+        </a>
+        <a class="botao claro" data-link="waze" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l.9-3.4A8 8 0 0 1 4 12Z"/><circle cx="9.5" cy="11" r=".8" fill="currentColor"/><circle cx="14.5" cy="11" r=".8" fill="currentColor"/><path d="M9.5 14.2c1.4 1 3.6 1 5 0"/></svg>
+          Waze
+        </a>
+      </div>
+    </div>
+    <div class="mapa revelar">
+      <iframe id="mapa" title="Mapa do CPOR/SP" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Confirmação de presença -->
+  <section id="confirmar" class="confirmar" aria-labelledby="confirmar-titulo">
+    <img class="confirmar-selo" src="selo-cera.png" alt="" width="229" height="235" loading="lazy">
+    <p class="rotulo claro">Confirmação de presença</p>
+    <h2 id="confirmar-titulo" class="titulo claro">Até 30 de novembro</h2>
+    <p class="prazo" id="prazo"></p>
+    <a class="botao principal" data-link="formulario" href="#" target="_blank" rel="noopener">Confirmar presença</a>
+    <div class="contatos">
+      <a data-link="whatsapp" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8.4 19L4 20Z"/><path d="M9 8.5c0 3.6 2.9 6.5 6.5 6.5l1-1.6-2-1-1 .9a5 5 0 0 1-2.8-2.8l.9-1-1-2L9 8.5Z"/></svg>
+        <span id="whatsapp-texto"></span>
+      </a>
+      <a data-link="email" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+        <span id="email-texto"></span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <img src="brasao.png" alt="" width="56" height="56" loading="lazy">
+    <p>Centro de Preparação de Oficiais da Reserva de São Paulo</p>
+    <a href="convite.jpg" target="_blank" rel="noopener">Ver o convite em imagem</a>
+  </footer>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
