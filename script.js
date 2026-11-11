@@ -17,7 +17,6 @@ const CONVITE = {
       dia: "03",
       mes: "dezembro",
       quando: "Quinta-feira · 19h",
-      agenda: "diplomacao.ics",
       traje: [
         ["Militares", "5º Z1 ou correspondente"],
         ["Militares da reserva e civis", "Passeio"]
@@ -29,7 +28,6 @@ const CONVITE = {
       dia: "05",
       mes: "dezembro",
       quando: "Sábado · 9h",
-      agenda: "formatura.ics",
       traje: [
         ["Oficiais", "4º com barretas ou correspondente"],
         ["Praças", "5º A1/5º A1S com barretas ou correspondente"],
@@ -91,22 +89,6 @@ const CONVITE = {
   aoRolar();
 
   /* ---------- Cartões da programação ---------- */
-  // iPhone abre o arquivo .ics direto no Calendário; nos outros, o Google Agenda já preenchido
-  const ehIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  function linkAgenda(e) {
-    if (ehIOS) return e.agenda;
-    const fmt = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-    const ini = new Date(e.inicio), fim = new Date(ini.getTime() + 2 * 3600000);
-    const p = new URLSearchParams({
-      action: "TEMPLATE",
-      text: e.nome + " · CPOR/SP",
-      dates: fmt(ini) + "/" + fmt(fim),
-      location: CONVITE.enderecoBusca,
-      details: "Cerimônia de Encerramento do Ano Letivo e conclusão do Curso de Formação de Oficiais da Reserva.\nTraje: " + e.traje.map(([q, v]) => q + ": " + v).join(" | ")
-    });
-    return "https://calendar.google.com/calendar/render?" + p.toString();
-  }
-  const icAgenda = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>';
   const icVirar = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5"/></svg>';
   $("#cartoes").innerHTML = CONVITE.eventos.map((e, i) => `
     <article class="cartao revelar" data-i="${i}" aria-label="${e.nome}, ${e.dia} de ${e.mes}, ${e.quando}">
@@ -119,7 +101,6 @@ const CONVITE = {
             <span class="quando">${e.quando}</span>
           </div>
           <div class="face-acoes">
-            <a class="mini salvar-data" href="${linkAgenda(e)}" ${ehIOS ? "download" : 'target="_blank" rel="noopener"'}>${icAgenda}Salvar data</a>
             <button type="button" class="mini virar" aria-label="Ver o traje da ${e.nome}">${icVirar}Traje</button>
           </div>
         </div>

@@ -7,7 +7,7 @@ Página para celular (abre direto pelo link do WhatsApp), sem build: `index.html
 2. Capa com a foto aérea do CPOR/SP, brasão e "Convite".
 3. Mensagem do convite num papel com o selo postal da fachada; as palavras se acendem conforme a rolagem.
 4. Contagem regressiva até a Diplomação (depois, até a Formatura).
-5. Programação: um cartão para cada data; tocar vira o cartão e mostra o traje. Botão "Salvar data": no Android abre o Google Agenda já preenchido; no iPhone abre o Calendário com o arquivo `diplomacao.ics` / `formatura.ics` (lembrete um dia antes).
+5. Programação: um cartão para cada data; tocar vira o cartão e mostra o traje.
 6. Local: endereço, botões do Google Maps e do Waze e o mapa do Google com o CPOR/SP; tocar no mapa abre o app de mapas.
 7. Confirmação de presença (Google Forms), WhatsApp e e-mail da Comunicação Social.
 8. Rodapé com link para o convite em imagem (`convite.jpg`).
