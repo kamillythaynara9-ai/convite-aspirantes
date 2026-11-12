@@ -19,7 +19,7 @@ const CONVITE = {
       quando: "Quinta-feira · 19h",
       traje: [
         ["Militares", "5º Z1 ou correspondente"],
-        ["Militares da reserva e civis", "Passeio"]
+        ["Militares da reserva e civis", "Esporte fino"]
       ]
     },
     {
@@ -31,7 +31,7 @@ const CONVITE = {
       traje: [
         ["Oficiais", "4º com barretas ou correspondente"],
         ["Praças", "5º A1/5º A1S com barretas ou correspondente"],
-        ["Militares da reserva e civis", "Passeio"]
+        ["Militares da reserva e civis", "Esporte fino"]
       ]
     }
   ]
@@ -64,28 +64,29 @@ const CONVITE = {
   $("#conteudo").setAttribute("inert", "");
   $("#topo").setAttribute("inert", "");
 
+  // O cartão sai do envelope (~1,8 s) e fica à mostra por 4 s; um toque passa adiante
+  let seguiu = false, espera = null;
+  function seguir() {
+    if (seguiu) return;
+    seguiu = true;
+    clearTimeout(espera);
+    document.body.classList.remove("fechado");
+    $("#conteudo").removeAttribute("inert");
+    $("#topo").removeAttribute("inert");
+    window.scrollTo(0, 0);
+    cena.classList.add("saindo");
+    setTimeout(() => { cena.hidden = true; }, 600);
+  }
   function abrir() {
     if (aberto) return;
     aberto = true;
     cena.classList.add("abrindo");
-    const t = calmo ? [150, 400] : [1700, 2300];
-    setTimeout(() => {
-      document.body.classList.remove("fechado");
-      $("#conteudo").removeAttribute("inert");
-      $("#topo").removeAttribute("inert");
-      window.scrollTo(0, 0);
-      cena.classList.add("saindo");
-    }, t[0]);
-    setTimeout(() => { cena.hidden = true; }, t[1]);
+    espera = setTimeout(seguir, calmo ? 2000 : 5800);
+    // depois que o cartão saiu, tocar em qualquer lugar segue para o convite
+    setTimeout(() => cena.addEventListener("click", seguir), calmo ? 300 : 1900);
   }
-  $("#abrir").addEventListener("click", abrir);
-  $("#envelope-peca").addEventListener("click", abrir);
-
-  /* ---------- Topo ganha fundo ao rolar ---------- */
-  const topo = $("#topo");
-  const aoRolar = () => topo.classList.toggle("rolou", window.scrollY > 40);
-  window.addEventListener("scroll", aoRolar, { passive: true });
-  aoRolar();
+  $("#abrir").addEventListener("click", e => { e.stopPropagation(); abrir(); });
+  $("#envelope-peca").addEventListener("click", e => { if (!aberto) { e.stopPropagation(); abrir(); } });
 
   /* ---------- Cartões da programação ---------- */
   const icVirar = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5"/></svg>';
@@ -173,22 +174,16 @@ const CONVITE = {
     $("#prazo").textContent = t;
   })();
 
-  /* ---------- Mensagem que se acende palavra a palavra ---------- */
+  /* ---------- Selo postal da mensagem acompanha levemente a rolagem ---------- */
   const msg = $("#mensagem-texto");
-  msg.setAttribute("aria-label", msg.textContent);
-  msg.innerHTML = msg.textContent.trim().split(/\s+/).map(p => `<span class="p" aria-hidden="true">${p}</span>`).join(" ");
-  const palavras = $$(".p", msg);
   const selo = $(".selo-postal");
-  function acender() {
+  function moverSelo() {
+    if (!selo || calmo) return;
     const r = msg.getBoundingClientRect(), vh = window.innerHeight;
-    const prog = calmo ? 1 : Math.min(1, Math.max(0, (vh * .9 - r.top) / (r.height + vh * .35)));
-    const n = Math.round(prog * palavras.length);
-    palavras.forEach((p, i) => p.classList.toggle("acesa", i < n));
-    if (selo && !calmo) selo.style.setProperty("--desloca", ((r.top - vh / 2) * -0.06).toFixed(1) + "px");
+    selo.style.setProperty("--desloca", ((r.top - vh / 2) * -0.06).toFixed(1) + "px");
   }
-  window.addEventListener("scroll", acender, { passive: true });
-  window.addEventListener("resize", acender);
-  acender();
+  window.addEventListener("scroll", moverSelo, { passive: true });
+  moverSelo();
 
   /* ---------- Entrada ao rolar ---------- */
   const alvos = $$(".revelar");
