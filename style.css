@@ -344,7 +344,12 @@ a { color: inherit; }
   width: 112px;
   transform: rotate(7deg) translateY(var(--desloca, 0px));
   filter: drop-shadow(0 8px 12px rgba(18, 23, 34, .25));
+  /* só aparece quando a pessoa começa a rolar para a segunda página */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .45s ease, visibility 0s .45s;
 }
+.selo-postal.aparece { opacity: 1; visibility: visible; transition: opacity .45s ease, visibility 0s; }
 .mensagem-texto {
   margin: 0;
   font: 400 clamp(21px, 5.6vw, 28px)/1.5 var(--fonte-titulo);

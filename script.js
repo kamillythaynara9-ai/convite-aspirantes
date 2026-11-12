@@ -64,7 +64,7 @@ const CONVITE = {
   $("#conteudo").setAttribute("inert", "");
   $("#topo").setAttribute("inert", "");
 
-  // O cartão sai do envelope (~1,8 s) e fica à mostra por 4 s; um toque passa adiante
+  // O cartão sai do envelope (~1,8 s) e fica à mostra por 3 s; um toque passa adiante
   let seguiu = false, espera = null;
   function seguir() {
     if (seguiu) return;
@@ -81,7 +81,7 @@ const CONVITE = {
     if (aberto) return;
     aberto = true;
     cena.classList.add("abrindo");
-    espera = setTimeout(seguir, calmo ? 2000 : 5800);
+    espera = setTimeout(seguir, calmo ? 2000 : 4800);
     // depois que o cartão saiu, tocar em qualquer lugar segue para o convite
     setTimeout(() => cena.addEventListener("click", seguir), calmo ? 300 : 1900);
   }
@@ -201,9 +201,12 @@ const CONVITE = {
   const msg = $("#mensagem-texto");
   const selo = $(".selo-postal");
   function moverSelo() {
-    if (!selo || calmo) return;
+    if (!selo) return;
+    // aparece só depois de rolar um pouco a partir da primeira página; volta a sumir lá em cima
+    selo.classList.toggle("aparece", window.scrollY > capaEl.offsetHeight * 0.3);
+    if (calmo) return;
     const r = msg.getBoundingClientRect(), vh = window.innerHeight;
-    selo.style.setProperty("--desloca", ((r.top - vh / 2) * -0.06).toFixed(1) + "px");
+    selo.style.setProperty("--desloca", Math.max(0, (r.top - vh / 2) * -0.06).toFixed(1) + "px");
   }
   window.addEventListener("scroll", moverSelo, { passive: true });
   moverSelo();
