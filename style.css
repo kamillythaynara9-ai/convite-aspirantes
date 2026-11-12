@@ -223,7 +223,8 @@ a { color: inherit; }
    ========================================================= */
 .capa {
   position: relative;
-  min-height: 100svh;
+  min-height: 100vh;
+  min-height: 100lvh; /* altura cheia mesmo quando a barra do navegador some: nada da próxima página aparece */
   overflow: hidden;
   color: var(--branco);
   isolation: isolate;
@@ -310,6 +311,7 @@ a { color: inherit; }
   position: absolute;
   left: 50%;
   bottom: 4svh;
+  bottom: calc(100lvh - 100svh + 4svh);
   width: 44px;
   height: 44px;
   display: grid;
@@ -656,6 +658,118 @@ a { color: inherit; }
   .cartao + .cartao { margin-left: -18px; margin-top: 40px; }
   .local { grid-template-columns: 1fr 1.2fr; align-items: center; padding-top: 72px; }
   .contatos { flex-direction: row; justify-content: center; gap: 18px; }
+}
+
+/* =========================================================
+   Páginas: cada parte ocupa a tela toda, centralizada, com seta para a próxima.
+   100lvh = tela inteira com a barra do navegador escondida (nada vaza da página seguinte);
+   o conteúdo e a seta ficam na área visível mesmo com a barra aparecendo (100svh).
+   ========================================================= */
+.pagina.pagina {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100lvh;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: max(36px, env(safe-area-inset-top));
+  padding-bottom: 82px;
+  padding-bottom: calc(100lvh - 100svh + 82px);
+}
+.mensagem.pagina, .contagem.pagina, .programacao.pagina, .confirmar.pagina {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contagem.pagina > *, .programacao.pagina > .cartoes { align-self: stretch; }
+.mensagem.pagina > .papel-mensagem { width: 100%; }
+.mensagem.pagina .mensagem-texto { font-size: clamp(18px, min(5.6vw, 3.5svh), 28px); }
+.mensagem.pagina .papel-mensagem { padding-top: clamp(30px, 6svh, 52px); padding-bottom: clamp(26px, 5svh, 44px); }
+.local.pagina { align-content: center; }
+.proxima {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  bottom: calc(100lvh - 100svh + 18px);
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(43, 50, 66, .08);
+  color: var(--tinta);
+  cursor: pointer;
+  transform: translateX(-50%);
+  animation: chamar 2.2s ease-in-out infinite;
+}
+.proxima svg { width: 22px; height: 22px; }
+.proxima.clara { background: rgba(255, 255, 255, .12); color: var(--branco); }
+@media (hover: hover) { .proxima:hover { background: rgba(43, 50, 66, .16); } .proxima.clara:hover { background: rgba(255, 255, 255, .22); } }
+
+/* Última página: confirmação + rodapé; o selo só aparece quando se chega nela */
+.confirmar.pagina { padding-top: max(40px, env(safe-area-inset-top)); padding-bottom: 0; padding-bottom: calc(100lvh - 100svh); }
+.confirmar.pagina .confirmar-selo {
+  position: static;
+  width: clamp(54px, 9svh, 84px);
+  margin: 0 auto 12px;
+  transform: rotate(-10deg);
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s ease, visibility 0s .5s;
+}
+.confirmar.pagina.chegou .confirmar-selo { opacity: 1; visibility: visible; transition: opacity .5s ease, visibility 0s; }
+.confirmar.pagina > .rodape { margin: clamp(14px, 3svh, 34px) -22px 0; padding: 14px 22px max(18px, env(safe-area-inset-bottom)); background: none; font-size: 12px; }
+.confirmar.pagina > .rodape img { width: 34px; margin-bottom: 6px; }
+.confirmar.pagina > .rodape p { margin-bottom: 4px; }
+.confirmar.pagina .prazo { margin: 8px 0 clamp(16px, 3svh, 30px); }
+.confirmar.pagina .contatos { margin-top: clamp(10px, 2.4svh, 26px); }
+.confirmar.pagina .contatos a { min-height: 40px; }
+.confirmar.pagina .titulo { font-size: clamp(30px, min(9vw, 6svh), 52px); }
+
+.pontos { display: none; }
+/* Computador com tela baixa: os cartões encolhem para caber */
+@media (min-width: 760px) {
+  .programacao.pagina .cartao { height: clamp(320px, calc(100svh - 300px), 460px); }
+  .programacao.pagina .cartao + .cartao { margin-top: 24px; }
+  .programacao.pagina .cartoes { margin-top: 26px; }
+}
+
+/* Programação no celular: os dois cartões lado a lado, deslizando, para caber numa página */
+@media (max-width: 759px) {
+  .programacao.pagina .cartoes {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 16px;
+    margin: 26px -20px 0;
+    padding: 8px 12vw 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .programacao.pagina .cartoes::-webkit-scrollbar { display: none; }
+  .pontos { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+  .pontos span { width: 7px; height: 7px; border-radius: 50%; background: rgba(43, 50, 66, .22); transition: background-color .3s, transform .3s; }
+  .pontos span.ativo { background: var(--tinta); transform: scale(1.2); }
+  .programacao.pagina .cartao {
+    flex: 0 0 76vw;
+    width: 76vw;
+    height: clamp(270px, calc(100svh - 318px), 460px);
+    scroll-snap-align: center;
+  }
+  /* no celular os dois cartões aparecem juntos (o segundo espiando ao lado) */
+  .js .programacao.pagina .cartao.revelar { opacity: 1; translate: 0 0; }
+  .programacao.pagina .titulo { font-size: clamp(30px, 8.4vw, 40px); }
+  .local.pagina { gap: 22px; }
+  .local.pagina .endereco { margin: 8px 0 16px; font-size: 20px; }
+  .local.pagina .mapa { width: min(100%, calc((100svh - 470px) * 528 / 393 + 20px)); min-width: 170px; margin: 0 auto; }
+  .local.pagina .titulo { font-size: clamp(30px, 8vw, 40px); }
+  .local.pagina .botao { min-height: 46px; }
+  .programacao.pagina .nota { margin-top: 6px; }
+  .programacao.pagina .cartoes { margin-top: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

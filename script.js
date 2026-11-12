@@ -211,6 +211,30 @@ const CONVITE = {
   window.addEventListener("scroll", moverSelo, { passive: true });
   moverSelo();
 
+  /* ---------- Pontinhos dos cartões (celular) ---------- */
+  const trilhoCartoes = $("#cartoes"), pontos = $$("#pontos span");
+  trilhoCartoes.addEventListener("scroll", () => {
+    const i = Math.round(trilhoCartoes.scrollLeft / Math.max(1, trilhoCartoes.scrollWidth - trilhoCartoes.clientWidth));
+    pontos.forEach((p, k) => p.classList.toggle("ativo", k === i));
+  }, { passive: true });
+
+  /* ---------- Setas: cada uma leva à página seguinte ---------- */
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".proxima");
+    if (!b) return;
+    const alvo = document.getElementById(b.dataset.para);
+    if (alvo) alvo.scrollIntoView({ behavior: calmo ? "auto" : "smooth", block: "start" });
+  });
+
+  /* ---------- Selo da confirmação: só quando se chega à última página ---------- */
+  const paginaConfirmar = $("#confirmar");
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => paginaConfirmar.classList.toggle("chegou", e.intersectionRatio > .55),
+      { threshold: [0, .55, 1] }).observe(paginaConfirmar);
+  } else {
+    paginaConfirmar.classList.add("chegou");
+  }
+
   /* ---------- Entrada ao rolar ---------- */
   const alvos = $$(".revelar");
   if ("IntersectionObserver" in window && !calmo) {

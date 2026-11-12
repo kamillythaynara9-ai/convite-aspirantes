@@ -64,15 +64,18 @@
   </section>
 
   <!-- Mensagem do convite, num papel com o selo postal da fachada -->
-  <section id="mensagem" class="mensagem">
+  <section id="mensagem" class="mensagem pagina">
     <article class="papel papel-mensagem revelar">
       <img class="selo-postal" src="selo-postal.png" alt="Selo com a fachada do CPOR/SP" width="207" height="164" loading="lazy">
       <p class="mensagem-texto" id="mensagem-texto">O Comandante do Centro de Preparação de Oficiais da Reserva de São Paulo, Coronel Frederico Vieira CABRAL Mendes, tem a honra de convidar o (a) Senhor (a) e digníssima família para a Cerimônia de Encerramento do Ano Letivo e conclusão do Curso de Formação de Oficiais da Reserva.</p>
     </article>
+    <button type="button" class="proxima" data-para="contagem" aria-label="Ir para a próxima página">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </button>
   </section>
 
   <!-- Contagem regressiva até a Diplomação -->
-  <section id="contagem" class="contagem" aria-labelledby="contagem-titulo">
+  <section id="contagem" class="contagem pagina" aria-labelledby="contagem-titulo">
     <h2 id="contagem-titulo" class="rotulo claro">Faltam para a Diplomação</h2>
     <div class="relogio" id="relogio" role="timer" aria-live="off">
       <div><span data-u="d">00</span><small>dias</small></div>
@@ -81,18 +84,25 @@
       <div><span data-u="s">00</span><small>seg</small></div>
     </div>
     <p class="contagem-fim" id="contagem-fim" hidden></p>
+    <button type="button" class="proxima clara" data-para="programacao" aria-label="Ir para a próxima página">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </button>
   </section>
 
   <!-- Programação: cartões que viram para mostrar o traje -->
-  <section id="programacao" class="programacao" aria-labelledby="programacao-titulo">
+  <section id="programacao" class="programacao pagina" aria-labelledby="programacao-titulo">
     <p class="rotulo">Programação</p>
     <h2 id="programacao-titulo" class="titulo">Duas datas, uma conquista</h2>
     <p class="nota">Toque no cartão para ver o traje</p>
     <div class="cartoes" id="cartoes"></div>
+    <div class="pontos" id="pontos" aria-hidden="true"><span class="ativo"></span><span></span></div>
+    <button type="button" class="proxima" data-para="local" aria-label="Ir para a próxima página">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </button>
   </section>
 
   <!-- Local com mapa -->
-  <section id="local" class="local" aria-labelledby="local-titulo">
+  <section id="local" class="local pagina" aria-labelledby="local-titulo">
     <div class="local-texto revelar">
       <p class="rotulo">Local</p>
       <h2 id="local-titulo" class="titulo">CPOR/SP</h2>
@@ -114,10 +124,13 @@
       </span>
       <span class="mapa-legenda">Toque para abrir no mapa</span>
     </a>
+    <button type="button" class="proxima" data-para="confirmar" aria-label="Ir para a próxima página">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+    </button>
   </section>
 
   <!-- Confirmação de presença -->
-  <section id="confirmar" class="confirmar" aria-labelledby="confirmar-titulo">
+  <section id="confirmar" class="confirmar pagina" aria-labelledby="confirmar-titulo">
     <img class="confirmar-selo" src="selo-cera.png" alt="" width="229" height="235" loading="lazy">
     <p class="rotulo claro">Confirmação de presença</p>
     <h2 id="confirmar-titulo" class="titulo claro">Até 30 de novembro</h2>
@@ -133,13 +146,13 @@
         <span id="email-texto"></span>
       </a>
     </div>
+    <footer class="rodape">
+      <img src="brasao.png" alt="" width="56" height="56" loading="lazy">
+      <p>Centro de Preparação de Oficiais da Reserva de São Paulo</p>
+      <a href="convite.jpg" target="_blank" rel="noopener">Ver o convite em imagem</a>
+    </footer>
   </section>
 
-  <footer class="rodape">
-    <img src="brasao.png" alt="" width="56" height="56" loading="lazy">
-    <p>Centro de Preparação de Oficiais da Reserva de São Paulo</p>
-    <a href="convite.jpg" target="_blank" rel="noopener">Ver o convite em imagem</a>
-  </footer>
 </main>
 
 <script src="script.js"></script>
