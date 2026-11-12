@@ -88,6 +88,29 @@ const CONVITE = {
   $("#abrir").addEventListener("click", e => { e.stopPropagation(); abrir(); });
   $("#envelope-peca").addEventListener("click", e => { if (!aberto) { e.stopPropagation(); abrir(); } });
 
+  /* ---------- Capa: texto sempre abaixo da bandeira do Brasil ---------- */
+  // Na foto cpor-aereo.jpg (1536 × 1024) a faixa da bandeira termina na linha 517.
+  const FOTO = { w: 1536, h: 1024, bandeira: 517 };
+  const capaEl = $(".capa"), capaImg = $(".capa-foto img");
+  function posicionarCapa() {
+    const w = capaEl.clientWidth, h = capaEl.clientHeight;
+    const emPe = window.matchMedia("(max-aspect-ratio: 1 / 1)").matches;
+    let linha;
+    if (emPe) {
+      // celular: a foto tem altura fixa e começa no topo
+      linha = FOTO.bandeira * capaImg.clientHeight / FOTO.h;
+    } else {
+      // computador: object-fit cover, posição vertical 60%
+      const esc = Math.max(w / FOTO.w, h / FOTO.h);
+      linha = (h - FOTO.h * esc) * 0.6 + FOTO.bandeira * esc;
+    }
+    capaImg.style.setProperty("--linha-bandeira", linha.toFixed(1) + "px");
+    capaEl.style.setProperty("--abaixo-bandeira", (linha + (emPe ? 22 : 26)).toFixed(1) + "px");
+  }
+  posicionarCapa();
+  window.addEventListener("resize", posicionarCapa);
+  if (!capaImg.complete) capaImg.addEventListener("load", posicionarCapa);
+
   /* ---------- Cartões da programação ---------- */
   const icVirar = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5"/></svg>';
   $("#cartoes").innerHTML = CONVITE.eventos.map((e, i) => `
