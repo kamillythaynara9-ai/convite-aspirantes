@@ -406,6 +406,9 @@ a { color: inherit; }
   color: var(--nevoa);
 }
 .contagem-fim { margin: 0; font: 400 italic 26px/1.4 var(--fonte-titulo); }
+.contagens { display: flex; flex-direction: column; gap: clamp(30px, 6svh, 52px); }
+.contagem-bloco .contagem-nome { margin-bottom: 16px; }
+.so-leitor { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* =========================================================
    Programação: cartões que viram

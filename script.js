@@ -64,7 +64,7 @@ const CONVITE = {
   $("#conteudo").setAttribute("inert", "");
   $("#topo").setAttribute("inert", "");
 
-  // O cartão sai do envelope (~1,8 s) e fica à mostra por 2 s; um toque passa adiante
+  // O cartão sai do envelope (~1,8 s) e fica à mostra por ~1,4 s; um toque passa adiante
   let seguiu = false, espera = null;
   function seguir() {
     if (seguiu) return;
@@ -81,7 +81,7 @@ const CONVITE = {
     if (aberto) return;
     aberto = true;
     cena.classList.add("abrindo");
-    espera = setTimeout(seguir, calmo ? 2000 : 3800);
+    espera = setTimeout(seguir, calmo ? 2000 : 3200);
     // depois que o cartão saiu, tocar em qualquer lugar segue para o convite
     setTimeout(() => cena.addEventListener("click", seguir), calmo ? 300 : 1900);
   }
@@ -157,32 +157,45 @@ const CONVITE = {
     });
   });
 
-  /* ---------- Contagem regressiva ---------- */
-  const relogio = $("#relogio"), fim = $("#contagem-fim"), tituloContagem = $("#contagem-titulo");
-  const campos = { d: $('[data-u="d"]'), h: $('[data-u="h"]'), m: $('[data-u="m"]'), s: $('[data-u="s"]') };
+  /* ---------- Contagem regressiva: uma para cada data ---------- */
   const dois = n => String(n).padStart(2, "0");
+  const unidades = [["d", "dias"], ["h", "horas"], ["m", "min"], ["s", "seg"]];
+  $("#contagens").innerHTML = CONVITE.eventos.map((e, i) => `
+    <div class="contagem-bloco" data-i="${i}">
+      <p class="rotulo claro contagem-nome">Faltam para a ${e.nome}</p>
+      <div class="relogio" role="timer" aria-live="off" aria-label="Contagem para a ${e.nome}">
+        ${unidades.map(([u, nome]) => `<div><span data-u="${u}">00</span><small>${nome}</small></div>`).join("")}
+      </div>
+      <p class="contagem-fim" hidden></p>
+    </div>`).join("");
+  const blocos = $$(".contagem-bloco").map(el => ({
+    el, nome: $(".contagem-nome", el), relogio: $(".relogio", el), fim: $(".contagem-fim", el),
+    campos: Object.fromEntries(unidades.map(([u]) => [u, $(`[data-u="${u}"]`, el)]))
+  }));
   function tique() {
     const agora = Date.now();
-    const prox = CONVITE.eventos.find(e => new Date(e.inicio).getTime() > agora);
-    if (!prox) {
-      const ultimo = CONVITE.eventos[CONVITE.eventos.length - 1];
-      const mesmoDia = new Date(agora).toDateString() === new Date(ultimo.inicio).toDateString();
-      relogio.hidden = true; fim.hidden = false;
-      tituloContagem.textContent = mesmoDia ? "É hoje" : "Cerimônias realizadas";
-      fim.textContent = mesmoDia ? "A Formatura é hoje. Bem-vindos!" : "Obrigado por fazer parte deste momento.";
-      return false;
-    }
-    tituloContagem.textContent = "Faltam para a " + prox.nome;
-    let r = Math.floor((new Date(prox.inicio).getTime() - agora) / 1000);
-    const v = { d: Math.floor(r / 86400), h: Math.floor(r % 86400 / 3600), m: Math.floor(r % 3600 / 60), s: r % 60 };
-    for (const k in v) {
-      const txt = dois(v[k]);
-      if (campos[k].textContent !== txt) {
-        campos[k].textContent = txt;
-        if (!calmo) { campos[k].classList.remove("virou"); void campos[k].offsetWidth; campos[k].classList.add("virou"); }
+    let algumAtivo = false;
+    CONVITE.eventos.forEach((e, i) => {
+      const b = blocos[i], alvo = new Date(e.inicio).getTime();
+      if (alvo <= agora) {
+        const hoje = new Date(agora).toDateString() === new Date(alvo).toDateString();
+        b.relogio.hidden = true; b.fim.hidden = false;
+        b.nome.textContent = e.nome;
+        b.fim.textContent = hoje ? "É hoje" : "Realizada";
+        return;
       }
-    }
-    return true;
+      algumAtivo = true;
+      const r = Math.floor((alvo - agora) / 1000);
+      const v = { d: Math.floor(r / 86400), h: Math.floor(r % 86400 / 3600), m: Math.floor(r % 3600 / 60), s: r % 60 };
+      for (const k in v) {
+        const txt = dois(v[k]), c = b.campos[k];
+        if (c.textContent !== txt) {
+          c.textContent = txt;
+          if (!calmo) { c.classList.remove("virou"); void c.offsetWidth; c.classList.add("virou"); }
+        }
+      }
+    });
+    return algumAtivo;
   }
   if (tique()) { const id = setInterval(() => { if (!tique()) clearInterval(id); }, 1000); }
 
