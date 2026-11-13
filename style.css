@@ -688,17 +688,10 @@ a { color: inherit; }
 .mensagem.pagina > .papel-mensagem { width: 100%; }
 .mensagem.pagina .mensagem-texto { font-size: clamp(18px, min(5.6vw, 3.5svh), 28px); }
 .mensagem.pagina .papel-mensagem { padding-top: clamp(30px, 6svh, 52px); padding-bottom: clamp(26px, 5svh, 44px); }
-/* celular: o selo fica no canto e o texto contorna ele (a linha termina antes e continua na de baixo) */
-.mensagem.pagina .selo-postal {
-  position: static;
-  float: right;
-  width: clamp(74px, 24vw, 96px);
-  margin: -54px -12px 6px 10px;
-  shape-margin: 8px;
-  transform: rotate(7deg);
-}
+/* celular: o selo fica no canto de cima, mais para fora do papel, sem cobrir o texto e sem deixar espaço vazio */
+.mensagem.pagina .selo-postal { top: -64px; right: -12px; width: clamp(76px, 23vw, 92px); transform: rotate(7deg); }
 @media (min-width: 760px) {
-  .mensagem.pagina .selo-postal { position: absolute; float: none; margin: 0; top: -56px; right: -30px; width: 130px; }
+  .mensagem.pagina .selo-postal { top: -56px; right: -30px; width: 130px; }
   .mensagem.pagina .mensagem-texto { margin-top: 18px; }
 }
 .local.pagina { align-content: center; }
