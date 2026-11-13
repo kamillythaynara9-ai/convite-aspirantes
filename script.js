@@ -64,7 +64,7 @@ const CONVITE = {
   $("#conteudo").setAttribute("inert", "");
   $("#topo").setAttribute("inert", "");
 
-  // O cartão sai do envelope (~1,8 s) e fica à mostra por 3 s; um toque passa adiante
+  // O cartão sai do envelope (~1,8 s) e fica à mostra por 2 s; um toque passa adiante
   let seguiu = false, espera = null;
   function seguir() {
     if (seguiu) return;
@@ -81,7 +81,7 @@ const CONVITE = {
     if (aberto) return;
     aberto = true;
     cena.classList.add("abrindo");
-    espera = setTimeout(seguir, calmo ? 2000 : 4800);
+    espera = setTimeout(seguir, calmo ? 2000 : 3800);
     // depois que o cartão saiu, tocar em qualquer lugar segue para o convite
     setTimeout(() => cena.addEventListener("click", seguir), calmo ? 300 : 1900);
   }
